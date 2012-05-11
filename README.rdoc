@@ -1,0 +1,82 @@
+= evil-plugin by tarao
+
+Plugins for Evil ( http://www.emacswiki.org/emacs/Evil ).
+
+== evil-cjk.el
+
+=== Usage
+
+  (require evil-cjk)
+
+It provides the following CJK patch for Evil
+- w/b acts properly on CJK texts
+- iw/aw text-object acts properly on CJK texts
+
+== evil-operator-comment.el
+
+=== Usage
+
+  (require evil-operator-comment)
+  (global-evil-operator-comment-mode 1)
+
+It provides comment/uncomment operator. You can use it by typing <tt>C*</tt>, for example, <tt>CC</tt> for commenting out the line at the cursor, <tt>Ciw</tt> for commenting out the word at the cursor. The key can be changed by setting custom variable <tt>evil-operator-comment-key</tt>.
+
+=== Examples
+
+<tt>|</tt> denotes the cursor position.
+
+<tt>Ciw</tt> on
+  (foo ba|r)
+comments out '<tt>bar</tt>', and <tt>Ci(</tt> comments out '<tt>foo bar</tt>'.
+
+=== Remarks
+
+The idea is taken from http://relaxedcolumn.blog8.fc2.com/blog-entry-154.html, which is to add comment/uncomment operator to Vim.
+
+== evil-operator-moccur.el
+
+=== Usage
+
+  (require evil-operator-moccur)
+  (global-evil-operator-moccur-mode 1)
+
+It provides an operator for <tt>moccur-grep-find</tt> command. You can use it by typing <tt>M*</tt>, for example, <tt>Miw</tt> for grepping a word under the cursor. The key can be changed by setting custom variable <tt>evil-operator-moccur-grep-find-key</tt>. You will be asked in which directory files to be grepped are located. Setting custom variable <tt>evil-operator-moccur-use-current-directory</tt> disables asking a directory and files in the current directory are grepped.
+
+=== Dependencies
+
+- color-moccur.el http://www.emacswiki.org/emacs/color-moccur.el
+
+== evil-relative-linum.el
+
+=== Usage
+
+  (require evil-relative-linum)
+
+It provides relative line numbers shown up when you hit operator keys.
+
+=== Dependencies
+
+- linum.el http://stud4.tuwien.ac.at/~e0225855/linum/linum.html (you don't need this if emacs-version >= 23)
+- linum+.el http://github.com/tarao/elisp/raw/master/linum+.el
+
+== evil-textobj-between.el
+
+=== Usage
+
+  (require evil-textoj-between)
+
+It provides text object for selecting a range between a character. Default key bindings are <tt>if</tt> and <tt>af</tt>, which select a range between a character by which the command is followed. <tt>if</tt> selects an inner range. These bindings can be changed by setting custom variable <tt>evil-textobj-between-i-key</tt> and <tt>evil-textobj-between-a-key</tt>.
+
+=== Examples
+
+<tt>|</tt> denotes the cursor position.
+
+<tt>dif,</tt> on
+  foo, b|ar, baz
+deletes '<tt> bar</tt>', and <tt>vif:</tt> on
+  :foo :b|ar :baz
+selects '<tt>bar </tt>'.
+
+=== Remarks
+
+The idea is taken from http://d.hatena.ne.jp/thinca/20100614/1276448745, which is to define textobj-between for Vim.
