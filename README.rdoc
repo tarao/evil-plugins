@@ -2,16 +2,6 @@
 
 Plugins for Evil ( http://www.emacswiki.org/emacs/Evil ).
 
-== evil-cjk.el
-
-=== Usage
-
-  (require 'evil-cjk)
-
-It provides the following CJK patch for Evil
-- w/b acts properly on CJK texts
-- iw/aw text-object acts properly on CJK texts
-
 == evil-operator-comment.el
 
 === Usage
