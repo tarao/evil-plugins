@@ -34,7 +34,7 @@
   :group 'evil)
 
 (defcustom evil-little-word-separating-categories
-  '((?u . ?U) (?_ . ?u) (?_ . ?U))
+  (append evil-cjk-word-separating-categories '((?u . ?U) (?_ . ?u) (?_ . ?U)))
   "List of pair (cons) of categories to determine word boundary
 for little word movement. See the documentation of
 `word-separating-categories'. Use `describe-categories' to see
@@ -43,7 +43,7 @@ the list of categories."
   :group 'evil-little-word)
 
 (defcustom evil-little-word-combining-categories
-  '()
+  (append evil-cjk-word-combining-categories '())
   "List of pair (cons) of categories to determine word boundary
 for little word movement. See the documentation of
 `word-combining-categories'. Use `describe-categories' to see the
@@ -51,30 +51,13 @@ list of categories."
   :type '((character . character))
   :group 'evil-little-word)
 
-(defcustom evil-little-word-cjk nil
-  "Force little word movement to be sensitive to CJK word
-boundary."
-  :type 'boolean
-  :group 'evil-cjk
-  :group 'evil-little-word)
-
 (defmacro evil-with-little-word (&rest body)
-  (declare (indent defun)
-           (debug t))
-  `(let ((sep (append (if (and evil-cjk-emacs-word-boundary
-                               (not evil-little-word-cjk))
-                          word-separating-categories
-                        evil-cjk-word-separating-categories)
-                      evil-little-word-separating-categories))
-         (cmb (append (if (and evil-cjk-emacs-word-boundary
-                               (not evil-little-word-cjk))
-                          word-combining-categories
-                        evil-cjk-word-combining-categories)
-                      evil-little-word-combining-categories)))
-     (let ((evil-cjk-emacs-word-boundary t) ; turn off CJK word boundary
-           (word-separating-categories sep)
-           (word-combining-categories cmb))
-       ,@body)))
+  (declare (indent defun) (debug t))
+  `(let ((evil-cjk-word-separating-categories
+          evil-little-word-separating-categories)
+         (evil-cjk-word-combining-categories
+          evil-little-word-combining-categories))
+     ,@body))
 
 (evil-define-union-move evil-move-little-word (count)
   "Move by little words."
