@@ -2,6 +2,36 @@
 
 Plugins for Evil ( http://www.emacswiki.org/emacs/Evil ).
 
+== evil-little-word.el
+
+=== Usage
+
+  (require 'evil-little-word)
+
+It provides little-word motion commands and text objects with default
+key bindings listed below.  The little-word motion commands are
+similar to those in
+{camelcasemotion.vim}[http://www.vim.org/scripts/script.php?script_id=1905].
+The motions stop at upcase letters just after a lowercase letter and
+at underscores ('<tt>_</tt>').  Unlike <tt>camelcasemotion.vim</tt>,
+little-word motions are sensitive to non-ascii uppercase/lowercase
+letters as long as Emacs knows which character is uppercase or not.
+See
+https://lists.ourproject.org/pipermail/implementations-list/2012-June/001604.html
+for further design details.
+
+=== Commands
+
+glw:: evil-forward-little-word-begin
+glb:: evil-backward-little-word-begin
+glW:: evil-forward-little-word-end
+glB:: evil-backward-little-word-end
+
+=== Text objects
+
+lw:: evil-a-little-word
+lw:: evil-inner-little-word
+
 == evil-operator-comment.el
 
 === Usage
