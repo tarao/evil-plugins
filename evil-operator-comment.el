@@ -12,15 +12,31 @@
             'sexp)
   :group 'evil-operator-comment)
 
+(defun evil-mark-on-lines (beg end lines)
+  (let ((beg-marker (save-excursion (goto-char beg) (point-marker)))
+        (end-marker (save-excursion (goto-char end) (point-marker))))
+    (set-marker-insertion-type end-marker t)
+    (setcdr lines (cons (cons beg-marker end-marker) (cdr lines)))))
+
+(defun evil-apply-on-block-markers (func beg end &rest args)
+  "Like `evil-apply-on-block' but first mark all lines and then
+call functions on the marked ranges."
+  (let ((lines (list nil)))
+    (evil-apply-on-block #'evil-mark-on-lines beg end lines)
+    (dolist (range (nreverse (cdr lines)))
+      (let ((beg (car range)) (end (cdr range)))
+        (apply func beg end args)
+        (set-marker beg nil)
+        (set-marker end nil)))))
+
 (evil-define-operator evil-comment-or-uncomment-region (beg end type)
   "Comment out text from BEG to END with TYPE."
   (interactive "<R>")
   (if (eq type 'block)
-      (evil-apply-on-block #'comment-or-uncomment-region beg end)
+      (evil-apply-on-block-markers #'comment-or-uncomment-region beg end)
     (comment-or-uncomment-region beg end))
   ;; place cursor on beginning of line
-  (when (and (evil-called-interactively-p)
-             (eq type 'line))
+  (when (and (evil-called-interactively-p) (eq type 'line))
     (evil-first-non-blank)))
 
 ;;;###autoload
