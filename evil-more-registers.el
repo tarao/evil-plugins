@@ -22,25 +22,45 @@
     range))
 
 (defun evil-record-last-insertion ()
+  "Record the last insertion range and its text.
+Store the inserted text and its range to
+`evil-current-insertions' as a pair.  The insertion range is
+represented as a series (a list) of ranges whose disjoint union
+is a single range."
   (let* ((list buffer-undo-list) e ins insertions)
     (while (and list (not (setq e (car-safe list)))) (setq list (cdr list)))
     (when (and (not (memq this-command '(evil-open-above evil-open-below)))
                (listp list)
+               ;; check if the latest undo entry is the one who was added
+               ;; after the last invocation of this function
                (or (not (eq e (car evil-last-undo-entry)))
                    (not (equal e (cdr evil-last-undo-entry)))))
+      ;; save the lastest undo entry
       (setq evil-last-undo-entry
             (cons e (or (cond ((consp e) (cons (car e) (cdr e)))
                               ((listp e) (copy-sequence e))) e)))
+      ;; find the current insertion
       (while (and (setq e (car-safe list)) (not ins))
         (when (and (consp e) (integerp (car e)) (integerp (cdr e)))
           (setq ins e))
         (setq list (cdr list)))
-      (when ins
+      (when ins ;; ins is the last insertion range
         (when (eq last-command evil-last-insertion-command)
+          ;; there is no other command between the current and the
+          ;; last insertions; they are treated as a series of
+          ;; insertions
           (setq insertions (cdr evil-current-insertions)))
         (when (not (eq (car-safe insertions) ins))
+          ;; if `this-command' and `last-command' are
+          ;; `self-insert-command', the current insertion points to
+          ;; the last insertion in `insertions', or otherwise, push
+          ;; the current insertion to `insertions'
           (push ins insertions))
         (when (cdr insertions)
+          ;; we only have to save the latest insertion separately to
+          ;; compare it with a future insertion; the rest of
+          ;; insertions can be merged
+          ;; (this means `insertions' have at most two elements)
           (setcdr insertions (list (evil-concat-ranges (cdr insertions)))))
         (let ((range (evil-concat-ranges insertions)))
           (unless range (setq range ins insertions (list ins)))
