@@ -38,7 +38,10 @@
       (when ins
         (when (eq last-command evil-last-insertion-command)
           (setq insertions (cdr evil-current-insertions)))
-        (add-to-list 'insertions ins)
+        (when (not (eq (car-safe insertions) ins))
+          (push ins insertions))
+        (when (cdr insertions)
+          (setcdr insertions (list (evil-concat-ranges (cdr insertions)))))
         (let ((range (evil-concat-ranges insertions)))
           (unless range (setq range ins insertions (list ins)))
           (setq evil-current-insertions
