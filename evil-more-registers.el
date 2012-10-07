@@ -143,13 +143,13 @@ Support some registers listed below in addition to
     the word under the cursor
     the WORD under the cursor"
   (cond
-   ((or (= register  6)  ; ^F the filename under the cursor
-        (= register 16)) ; ^P the expanded filename under the cursor
+   ((or (= register ?\C-f)  ; ^F the filename under the cursor
+        (= register ?\C-p)) ; ^P the expanded filename under the cursor
     (let ((file (thing-at-point 'filename)))
-      (or (and file (= register 16) (expand-file-name file)) file)))
-   ((or (= register 23)  ; ^W the word under the cursor
-        (= register 1))  ; ^A the WORD under the cursor
-    (let* ((word (if (= register 1) #'evil-move-WORD #'evil-move-word))
+      (or (and file (= register ?\C-p) (expand-file-name file)) file)))
+   ((or (= register ?\C-w)  ; ^W the word under the cursor
+        (= register ?\C-a)) ; ^A the WORD under the cursor
+    (let* ((word (if (= register ?\C-a) #'evil-move-WORD #'evil-move-word))
            (range (evil-inner-object-range nil nil nil nil word)))
       (buffer-substring-no-properties (nth 0 range) (nth 1 range))))
    (t (evil-orig-get-register register noerror))))
