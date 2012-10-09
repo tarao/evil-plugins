@@ -2,6 +2,15 @@
 
 Plugins for Evil ( http://www.emacswiki.org/emacs/Evil ).
 
+== evil-ex-registers.el
+
+=== Usage
+
+  (require 'evil-more-registers)
+  (define-key evil-ex-completion-map (kbd "C-r") #'evil-ex-paste-from-register)
+
+It provides special registers for ex mode.
+
 == evil-little-word.el
 
 === Usage
@@ -31,15 +40,6 @@ glB:: evil-backward-little-word-end
 
 lw:: evil-a-little-word
 lw:: evil-inner-little-word
-
-== evil-more-registers.el
-
-=== Usage
-
-  (require 'evil-more-registers)
-  (define-key evil-ex-completion-map (kbd "C-r") #'evil-ex-paste-from-register)
-
-It provides special registers currently missing in Evil.
 
 == evil-operator-comment.el
 
