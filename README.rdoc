@@ -41,6 +41,53 @@ glB:: evil-backward-little-word-end
 lw:: evil-a-little-word
 lw:: evil-inner-little-word
 
+== evil-mode-line.el
+
+=== Usage
+
+  (require 'evil-mode-line)
+
+It gives a state indicator at the beginning of the mode line and
+changes the mode line color for each state.
+
+=== Dependencies
+
+- mode-line-color.el http://github.com/tarao/elisp/raw/master/mode-line-color.el
+
+=== Customization
+
+==== evil-mode-line-color
+
+An associative list which specifies correspondence between Evil states
+and colors. The key of the associative list must be a symbol of an
+Evil state (such as `normal`, `insert`, etc.) and the value of the
+associative list must be a string of a color (such as "SteelBlue4",
+"#575735", etc.).
+
+==== evil-normal-state-msg
+
+A string shown at the mode line as a state indicator of normal state.
+
+==== evil-insert-state-msg
+
+A string shown at the mode line as a state indicator of insert state.
+
+==== evil-replace-state-msg
+
+A string shown at the mode line as a state indicator of replace state.
+
+==== evil-emacs-state-msg
+
+A string shown at the mode line as a state indicator of emacs state.
+
+==== evil-visual-state-msg-alist
+
+An associative list which specifies correspondence between Evil visual
+state types and state indicator strings. The key of the associative
+list must be a symbol of visual state type (such as `normal`, `line`
+and `block`) and the value of the associative list must be a string of
+indicator.
+
 == evil-operator-comment.el
 
 === Usage
