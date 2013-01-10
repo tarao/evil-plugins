@@ -176,3 +176,12 @@ selects '<tt>bar </tt>'.
 The idea is taken from
 http://d.hatena.ne.jp/thinca/20100614/1276448745, which is to define
 textobj-between for Vim.
+
+== hexl-evil-patch.el
+
+=== Usage
+
+  (require 'hexl-evil-patch)
+
+A patch for `hexl-mode`, a mode for editing binary files in hex dump
+format.
