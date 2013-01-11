@@ -1,3 +1,29 @@
+;;; evil-mode-line.el --- Mode line plugin for Evil
+
+;; Author: INA Lintaro <tarao.gnn at gmail.com>
+;; URL: http://github.com/tarao/evil-plugins
+;; Version: 0.1
+;; Keywords: evil, plugin
+
+;; This file is NOT part of GNU Emacs.
+
+;;; License:
+;;
+;; This program is free software: you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation, either version 3 of the License, or
+;; (at your option) any later version.
+;;
+;; This program is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+;;
+;; You should have received a copy of the GNU General Public License
+;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+;;; Code:
+
 (require 'evil)
 (require 'mode-line-color)
 
@@ -91,3 +117,4 @@ We have our own \"--\" put by `evil-mode-line-state-msg-format'."
               (append '("" evil-mode-line-msg) mode-line-format))
 
 (provide 'evil-mode-line)
+;;; evil-mode-line.el ends here
