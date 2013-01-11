@@ -60,9 +60,9 @@ changes the mode line color for each state.
 
 An associative list which specifies correspondence between Evil states
 and colors. The key of the associative list must be a symbol of an
-Evil state (such as `normal`, `insert`, etc.) and the value of the
-associative list must be a string of a color (such as "SteelBlue4",
-"#575735", etc.).
+Evil state (such as <tt>normal</tt>, <tt>insert</tt>, etc.) and the
+value of the associative list must be a string of a color (such as
+"SteelBlue4", "#575735", etc.).
 
 ==== evil-normal-state-msg
 
@@ -84,9 +84,9 @@ A string shown at the mode line as a state indicator of emacs state.
 
 An associative list which specifies correspondence between Evil visual
 state types and state indicator strings. The key of the associative
-list must be a symbol of visual state type (such as `normal`, `line`
-and `block`) and the value of the associative list must be a string of
-indicator.
+list must be a symbol of visual state type (such as <tt>normal</tt>,
+<tt>line</tt> and <tt>block</tt>) and the value of the associative
+list must be a string of indicator.
 
 == evil-operator-comment.el
 
@@ -183,5 +183,5 @@ textobj-between for Vim.
 
   (require 'hexl-evil-patch)
 
-A patch for `hexl-mode`, a mode for editing binary files in hex dump
-format.
+A patch for <tt>hexl-mode</tt>, a mode for editing binary files in hex
+dump format.
