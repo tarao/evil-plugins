@@ -42,21 +42,25 @@
 
 (defun evil-between-range (count beg end type &optional inclusive)
   (ignore-errors
-    (let ((ch (evil-read-key)) beg-inc end-inc)
+    (let ((count (abs (or count 1)))
+          (beg (and beg end (min beg end)))
+          (end (and beg end (max beg end)))
+          (ch (evil-read-key))
+          beg-inc end-inc)
+      (save-excursion
+        (when beg (goto-char beg))
+        (evil-find-char (- count) ch)
+        (setq beg-inc (point)))
       (save-excursion
         (when end (goto-char end))
         (backward-char)
         (evil-find-char count ch)
         (setq end-inc (1+ (point))))
-      (save-excursion
-        (when beg (goto-char beg))
-        (evil-find-char-backward count ch)
-        (setq beg-inc (point)))
       (if inclusive
           (evil-range beg-inc end-inc)
-        (evil-range
-         (if (and beg (= (1+ beg-inc) beg)) beg-inc (1+ beg-inc))
-         (if (and end (= (1- end-inc) end)) end-inc (1- end-inc)))))))
+        (if (and beg end (= (1+ beg-inc) beg) (= (1- end-inc) end))
+            (evil-range beg-inc end-inc)
+          (evil-range (1+ beg-inc) (1- end-inc)))))))
 
 (evil-define-text-object evil-a-between (count &optional beg end type)
   "Select range between a character by which the command is followed."
