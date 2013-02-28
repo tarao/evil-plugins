@@ -64,11 +64,9 @@
 
 (evil-define-text-object evil-a-between (count &optional beg end type)
   "Select range between a character by which the command is followed."
-  :extend-selection t
   (evil-between-range count beg end type t))
 (evil-define-text-object evil-inner-between (count &optional beg end type)
   "Select inner range between a character by which the command is followed."
-  :extend-selection nil
   (evil-between-range count beg end type))
 
 (define-key evil-outer-text-objects-map evil-textobj-between-a-key
