@@ -50,7 +50,7 @@
   "Like `evil-apply-on-block' but first mark all lines and then
 call functions on the marked ranges."
   (let ((lines (list nil)))
-    (evil-apply-on-block #'evil-mark-on-lines beg end lines)
+    (evil-apply-on-block #'evil-mark-on-lines beg end nil lines)
     (dolist (range (nreverse (cdr lines)))
       (let ((beg (car range)) (end (cdr range)))
         (apply func beg end args)
