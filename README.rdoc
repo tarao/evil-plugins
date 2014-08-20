@@ -152,7 +152,7 @@ It provides relative line numbers shown up when you hit operator keys.
 
 === Usage
 
-  (require 'evil-textoj-between)
+  (require 'evil-textobj-between)
 
 It provides text object for selecting a range between a
 character. Default key bindings are <tt>if</tt> and <tt>af</tt>, which
