@@ -83,9 +83,9 @@ list of categories."
           evil-little-word-combining-categories))
      ,@body))
 
-(evil-define-union-move evil-move-little-word (count)
-  "Move by little words."
-  (evil-with-little-word (evil-move-word count)))
+(defun forward-evil-little-word (&optional count)
+  "Forward by little words."
+  (evil-with-little-word (forward-evil-word count)))
 
 (evil-define-motion evil-forward-little-word-begin (count)
   "Move the cursor to the beginning of the COUNT-th next little word."
@@ -109,11 +109,11 @@ list of categories."
 
 (evil-define-text-object evil-a-little-word (count &optional beg end type)
   "Select a little word."
-  (evil-an-object-range count beg end type #'evil-move-little-word))
+  (evil-select-an-object 'evil-little-word beg end type count))
 
 (evil-define-text-object evil-inner-little-word (count &optional beg end type)
   "Select inner little word."
-  (evil-inner-object-range count beg end type #'evil-move-little-word))
+  (evil-select-inner-object 'evil-little-word beg end type count))
 
 (define-key evil-motion-state-map (kbd "glw") 'evil-forward-little-word-begin)
 (define-key evil-motion-state-map (kbd "glb") 'evil-backward-little-word-begin)
