@@ -6,7 +6,7 @@ Plugins for Evil ( http://www.emacswiki.org/emacs/Evil ).
 
 === Usage
 
-  (require 'evil-more-registers)
+  (require 'evil-ex-registers)
   (define-key evil-ex-completion-map (kbd "C-r") #'evil-ex-paste-from-register)
 
 It provides special registers for ex mode.
